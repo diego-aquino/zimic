@@ -8,7 +8,9 @@ import {
 
 import HttpHeaders, { HttpHeadersInit } from '@/http/headers/HttpHeaders';
 import { HttpHeadersSchema } from '@/http/headers/types';
-import { DefaultBody, HttpResponse, HttpRequest } from '@/http/types/requests';
+import HttpRequest from '@/http/HttpRequest';
+import HttpResponse from '@/http/HttpResponse';
+import { DefaultBody } from '@/http/types/requests';
 import { Default } from '@/types/utils';
 
 import HttpSearchParams from '../../../http/searchParams/HttpSearchParams';

@@ -1,6 +1,7 @@
 import { HttpHeadersInit } from '@/http/headers/HttpHeaders';
+import HttpRequest from '@/http/HttpRequest';
+import HttpResponse from '@/http/HttpResponse';
 import HttpSearchParams from '@/http/searchParams/HttpSearchParams';
-import { HttpRequest, HttpResponse } from '@/http/types/requests';
 import { Default, PossiblePromise } from '@/types/utils';
 
 import {

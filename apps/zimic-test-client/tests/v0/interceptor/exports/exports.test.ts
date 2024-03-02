@@ -2,8 +2,8 @@ import { describe, expect, expectTypeOf, it } from 'vitest';
 import {
   type JSONValue,
   type DefaultBody,
-  type HttpRequest,
-  type HttpResponse,
+  HttpRequest,
+  HttpResponse,
   HttpSearchParams,
   type HttpSearchParamsSchema,
   type HttpSearchParamsSchemaTuple,
@@ -51,8 +51,23 @@ describe('Exports', () => {
 
     expectTypeOf<JSONValue>().not.toBeAny();
     expectTypeOf<DefaultBody>().not.toBeAny();
+
     expectTypeOf<HttpRequest>().not.toBeAny();
+    expect(new HttpRequest('http://localhost:3000')).toBeInstanceOf(Request);
+
     expectTypeOf<HttpResponse>().not.toBeAny();
+    expect(new HttpResponse(null, { status: 200 })).toBeInstanceOf(Response);
+
+    expectTypeOf<HttpHeadersSchema>().not.toBeAny();
+    expectTypeOf<HttpHeadersSchemaTuple<never>>().not.toBeAny();
+    expectTypeOf<HttpHeaders>().not.toBeAny();
+    expect(new HttpHeaders()).toBeInstanceOf(Headers);
+
+    expectTypeOf<HttpSearchParamsSchema>().not.toBeAny();
+    expectTypeOf<HttpSearchParamsSchemaTuple<never>>().not.toBeAny();
+    expectTypeOf<HttpSearchParams>().not.toBeAny();
+    expect(new HttpSearchParams()).toBeInstanceOf(URLSearchParams);
+
     expectTypeOf<HttpInterceptorWorker>().not.toBeAny();
     expectTypeOf<HttpInterceptorWorkerOptions>().not.toBeAny();
     expectTypeOf<HttpInterceptorWorkerPlatform>().not.toBeAny();
@@ -63,18 +78,6 @@ describe('Exports', () => {
     expectTypeOf<HttpInterceptorResponse<never, never>>().not.toBeAny();
     expectTypeOf<TrackedHttpInterceptorRequest<never>>().not.toBeAny();
     expectTypeOf<HttpRequestTracker<never, never, never>>().not.toBeAny();
-
-    expectTypeOf<HttpHeadersSchema>().not.toBeAny();
-    expectTypeOf<HttpHeadersSchemaTuple<never>>().not.toBeAny();
-
-    expectTypeOf<HttpHeaders>().not.toBeAny();
-    expect(new HttpHeaders()).toBeInstanceOf(Headers);
-
-    expectTypeOf<HttpSearchParamsSchema>().not.toBeAny();
-    expectTypeOf<HttpSearchParamsSchemaTuple<never>>().not.toBeAny();
-
-    expectTypeOf<HttpSearchParams>().not.toBeAny();
-    expect(new HttpSearchParams()).toBeInstanceOf(URLSearchParams);
 
     expectTypeOf<HttpInterceptorOptions>().not.toBeAny();
     expectTypeOf<HttpInterceptorMethod>().not.toBeAny();

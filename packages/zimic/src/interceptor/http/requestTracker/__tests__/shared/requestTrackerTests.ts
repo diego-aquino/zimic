@@ -1,6 +1,7 @@
 import { expectTypeOf, expect, vi, it, beforeAll, afterAll, describe } from 'vitest';
 
-import { HttpRequest, HttpResponse } from '@/http/types/requests';
+import HttpRequest from '@/http/HttpRequest';
+import HttpResponse from '@/http/HttpResponse';
 import { createHttpInterceptor } from '@/interceptor/http/interceptor/factory';
 import HttpInterceptor from '@/interceptor/http/interceptor/HttpInterceptor';
 import { HttpInterceptorSchema } from '@/interceptor/http/interceptor/types/schema';
