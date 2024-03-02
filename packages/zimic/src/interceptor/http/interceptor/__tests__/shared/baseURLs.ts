@@ -1,5 +1,7 @@
 import { afterAll, beforeAll, expect, expectTypeOf, it } from 'vitest';
 
+import HttpRequest from '@/http/requests/HttpRequest';
+import HttpResponse from '@/http/responses/HttpResponse';
 import { createHttpInterceptorWorker } from '@/interceptor/http/interceptorWorker/factory';
 import { usingHttpInterceptor } from '@tests/utils/interceptors';
 
@@ -54,11 +56,12 @@ export function declareBaseURLHttpInterceptorTests(options: SharedHttpIntercepto
 
       expect(requests).toHaveLength(1);
       const [request] = requests;
-      expect(request).toBeInstanceOf(Request);
+      expect(request).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(request.body).toEqualTypeOf<null>();
       expect(request.body).toBe(null);
 
+      expect(request.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(request.response.status).toEqualTypeOf<200>();
       expect(request.response.status).toEqual(200);
 

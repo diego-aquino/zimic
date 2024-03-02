@@ -4,7 +4,7 @@ import { HttpRequestResolverExtras } from 'msw/lib/core/handlers/HttpHandler';
 import { ResponseResolverInfo } from 'msw/lib/core/handlers/RequestHandler';
 import type { SetupServer as NodeMSWWorker } from 'msw/node';
 
-import HttpResponse from '@/http/HttpResponse';
+import HttpResponse from '@/http/responses/HttpResponse';
 import { DefaultBody } from '@/http/types/requests';
 import { PossiblePromise } from '@/types/utils';
 

@@ -1,6 +1,8 @@
 import { afterAll, afterEach, beforeAll, expect, expectTypeOf, it } from 'vitest';
 
 import HttpHeaders from '@/http/headers/HttpHeaders';
+import HttpRequest from '@/http/requests/HttpRequest';
+import HttpResponse from '@/http/responses/HttpResponse';
 import HttpSearchParams from '@/http/searchParams/HttpSearchParams';
 import { createHttpInterceptorWorker } from '@/interceptor/http/interceptorWorker/factory';
 import HttpInterceptorWorker from '@/interceptor/http/interceptorWorker/HttpInterceptorWorker';
@@ -59,11 +61,12 @@ export function declareDeleteHttpInterceptorTests({ platform }: SharedHttpInterc
 
       expect(deletionRequests).toHaveLength(1);
       const [deletionRequest] = deletionRequests;
-      expect(deletionRequest).toBeInstanceOf(Request);
+      expect(deletionRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(deletionRequest.body).toEqualTypeOf<null>();
       expect(deletionRequest.body).toBe(null);
 
+      expect(deletionRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(deletionRequest.response.status).toEqualTypeOf<200>();
       expect(deletionRequest.response.status).toEqual(200);
 
@@ -110,11 +113,12 @@ export function declareDeleteHttpInterceptorTests({ platform }: SharedHttpInterc
 
       expect(deletionRequests).toHaveLength(1);
       const [deletionRequest] = deletionRequests;
-      expect(deletionRequest).toBeInstanceOf(Request);
+      expect(deletionRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(deletionRequest.body).toEqualTypeOf<User>();
       expect(deletionRequest.body).toEqual<User>({ name: userName });
 
+      expect(deletionRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(deletionRequest.response.status).toEqualTypeOf<200>();
       expect(deletionRequest.response.status).toEqual(200);
 
@@ -163,7 +167,7 @@ export function declareDeleteHttpInterceptorTests({ platform }: SharedHttpInterc
 
       expect(deletionRequests).toHaveLength(1);
       const [deletionRequest] = deletionRequests;
-      expect(deletionRequest).toBeInstanceOf(Request);
+      expect(deletionRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(deletionRequest.searchParams).toEqualTypeOf<HttpSearchParams<UserDeletionSearchParams>>();
       expect(deletionRequest.searchParams).toBeInstanceOf(HttpSearchParams);
@@ -227,12 +231,13 @@ export function declareDeleteHttpInterceptorTests({ platform }: SharedHttpInterc
 
       expect(deletionRequests).toHaveLength(1);
       const [deletionRequest] = deletionRequests;
-      expect(deletionRequest).toBeInstanceOf(Request);
+      expect(deletionRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(deletionRequest.headers).toEqualTypeOf<HttpHeaders<UserDeletionRequestHeaders>>();
       expect(deletionRequest.headers).toBeInstanceOf(HttpHeaders);
       expect(deletionRequest.headers.get('accept')).toBe('application/json');
 
+      expect(deletionRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(deletionRequest.response.headers).toEqualTypeOf<HttpHeaders<UserDeletionResponseHeaders>>();
       expect(deletionRequest.response.headers).toBeInstanceOf(HttpHeaders);
       expect(deletionRequest.response.headers.get('content-type')).toBe('application/json');
@@ -267,11 +272,12 @@ export function declareDeleteHttpInterceptorTests({ platform }: SharedHttpInterc
 
       expect(genericDeletionRequests).toHaveLength(1);
       const [genericDeletionRequest] = genericDeletionRequests;
-      expect(genericDeletionRequest).toBeInstanceOf(Request);
+      expect(genericDeletionRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(genericDeletionRequest.body).toEqualTypeOf<null>();
       expect(genericDeletionRequest.body).toBe(null);
 
+      expect(genericDeletionRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(genericDeletionRequest.response.status).toEqualTypeOf<200>();
       expect(genericDeletionRequest.response.status).toEqual(200);
 
@@ -297,11 +303,12 @@ export function declareDeleteHttpInterceptorTests({ platform }: SharedHttpInterc
 
       expect(specificDeletionRequests).toHaveLength(1);
       const [specificDeletionRequest] = specificDeletionRequests;
-      expect(specificDeletionRequest).toBeInstanceOf(Request);
+      expect(specificDeletionRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(specificDeletionRequest.body).toEqualTypeOf<null>();
       expect(specificDeletionRequest.body).toBe(null);
 
+      expect(specificDeletionRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(specificDeletionRequest.response.status).toEqualTypeOf<200>();
       expect(specificDeletionRequest.response.status).toEqual(200);
 
@@ -373,11 +380,12 @@ export function declareDeleteHttpInterceptorTests({ platform }: SharedHttpInterc
       expect(deletionRequestsWithResponse).toHaveLength(1);
 
       const [deletionRequest] = deletionRequestsWithResponse;
-      expect(deletionRequest).toBeInstanceOf(Request);
+      expect(deletionRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(deletionRequest.body).toEqualTypeOf<User>();
       expect(deletionRequest.body).toEqual<User>({ name: userName });
 
+      expect(deletionRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(deletionRequest.response.status).toEqualTypeOf<200>();
       expect(deletionRequest.response.status).toEqual(200);
 
@@ -423,11 +431,12 @@ export function declareDeleteHttpInterceptorTests({ platform }: SharedHttpInterc
 
       expect(deletionRequests).toHaveLength(1);
       const [deletionRequest] = deletionRequests;
-      expect(deletionRequest).toBeInstanceOf(Request);
+      expect(deletionRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(deletionRequest.body).toEqualTypeOf<null>();
       expect(deletionRequest.body).toBe(null);
 
+      expect(deletionRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(deletionRequest.response.status).toEqualTypeOf<200>();
       expect(deletionRequest.response.status).toEqual(200);
 
@@ -452,11 +461,12 @@ export function declareDeleteHttpInterceptorTests({ platform }: SharedHttpInterc
 
       expect(errorDeletionRequests).toHaveLength(1);
       const [errorDeletionRequest] = errorDeletionRequests;
-      expect(errorDeletionRequest).toBeInstanceOf(Request);
+      expect(errorDeletionRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(errorDeletionRequest.body).toEqualTypeOf<null>();
       expect(errorDeletionRequest.body).toBe(null);
 
+      expect(errorDeletionRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(errorDeletionRequest.response.status).toEqualTypeOf<500>();
       expect(errorDeletionRequest.response.status).toEqual(500);
 
@@ -511,11 +521,12 @@ export function declareDeleteHttpInterceptorTests({ platform }: SharedHttpInterc
 
       expect(deletionRequests).toHaveLength(1);
       let [deletionRequest] = deletionRequests;
-      expect(deletionRequest).toBeInstanceOf(Request);
+      expect(deletionRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(deletionRequest.body).toEqualTypeOf<null>();
       expect(deletionRequest.body).toBe(null);
 
+      expect(deletionRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(deletionRequest.response.status).toEqualTypeOf<200>();
       expect(deletionRequest.response.status).toEqual(200);
 
@@ -540,11 +551,12 @@ export function declareDeleteHttpInterceptorTests({ platform }: SharedHttpInterc
 
       expect(errorDeletionRequests).toHaveLength(1);
       const [errorDeletionRequest] = errorDeletionRequests;
-      expect(errorDeletionRequest).toBeInstanceOf(Request);
+      expect(errorDeletionRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(errorDeletionRequest.body).toEqualTypeOf<null>();
       expect(errorDeletionRequest.body).toBe(null);
 
+      expect(errorDeletionRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(errorDeletionRequest.response.status).toEqualTypeOf<500>();
       expect(errorDeletionRequest.response.status).toEqual(500);
 
@@ -563,11 +575,12 @@ export function declareDeleteHttpInterceptorTests({ platform }: SharedHttpInterc
 
       expect(deletionRequests).toHaveLength(2);
       [deletionRequest] = deletionRequests;
-      expect(deletionRequest).toBeInstanceOf(Request);
+      expect(deletionRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(deletionRequest.body).toEqualTypeOf<null>();
       expect(deletionRequest.body).toBe(null);
 
+      expect(deletionRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(deletionRequest.response.status).toEqualTypeOf<200>();
       expect(deletionRequest.response.status).toEqual(200);
 
@@ -634,11 +647,12 @@ export function declareDeleteHttpInterceptorTests({ platform }: SharedHttpInterc
 
       expect(deletionRequests).toHaveLength(1);
       const [deletionRequest] = deletionRequests;
-      expect(deletionRequest).toBeInstanceOf(Request);
+      expect(deletionRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(deletionRequest.body).toEqualTypeOf<null>();
       expect(deletionRequest.body).toBe(null);
 
+      expect(deletionRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(deletionRequest.response.status).toEqualTypeOf<200>();
       expect(deletionRequest.response.status).toEqual(200);
 
@@ -680,11 +694,12 @@ export function declareDeleteHttpInterceptorTests({ platform }: SharedHttpInterc
 
       expect(deletionRequests).toHaveLength(1);
       const [deletionRequest] = deletionRequests;
-      expect(deletionRequest).toBeInstanceOf(Request);
+      expect(deletionRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(deletionRequest.body).toEqualTypeOf<null>();
       expect(deletionRequest.body).toBe(null);
 
+      expect(deletionRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(deletionRequest.response.status).toEqualTypeOf<200>();
       expect(deletionRequest.response.status).toEqual(200);
 

@@ -1,6 +1,6 @@
-import HttpHeaders, { HttpHeadersInit } from './headers/HttpHeaders';
-import { HttpHeadersSchema } from './headers/types';
-import { DefaultBody } from './types/requests';
+import HttpHeaders, { HttpHeadersInit } from '../headers/HttpHeaders';
+import { HttpHeadersSchema } from '../headers/types';
+import { DefaultBody } from '../types/requests';
 
 /**
  * An HTTP request with a strictly-typed JSON body. Fully compatible with the built-in

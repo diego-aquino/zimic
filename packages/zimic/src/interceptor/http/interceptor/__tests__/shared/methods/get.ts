@@ -1,6 +1,8 @@
 import { afterAll, afterEach, beforeAll, expect, expectTypeOf, it } from 'vitest';
 
 import HttpHeaders from '@/http/headers/HttpHeaders';
+import HttpRequest from '@/http/requests/HttpRequest';
+import HttpResponse from '@/http/responses/HttpResponse';
 import HttpSearchParams from '@/http/searchParams/HttpSearchParams';
 import { createHttpInterceptorWorker } from '@/interceptor/http/interceptorWorker/factory';
 import HttpInterceptorWorker from '@/interceptor/http/interceptorWorker/HttpInterceptorWorker';
@@ -59,11 +61,12 @@ export function declareGetHttpInterceptorTests({ platform }: SharedHttpIntercept
 
       expect(listRequests).toHaveLength(1);
       const [listRequest] = listRequests;
-      expect(listRequest).toBeInstanceOf(Request);
+      expect(listRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(listRequest.body).toEqualTypeOf<null>();
       expect(listRequest.body).toBe(null);
 
+      expect(listRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(listRequest.response.status).toEqualTypeOf<200>();
       expect(listRequest.response.status).toEqual(200);
 
@@ -103,14 +106,16 @@ export function declareGetHttpInterceptorTests({ platform }: SharedHttpIntercept
 
       expect(listRequests).toHaveLength(1);
       const [listRequest] = listRequests;
-      expect(listRequest).toBeInstanceOf(Request);
+      expect(listRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(listRequest.body).toEqualTypeOf<null>();
       expect(listRequest.body).toBe(null);
 
+      expect(listRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(listRequest.response.status).toEqualTypeOf<200>();
       expect(listRequest.response.status).toEqual(200);
 
+      expect(listRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(listRequest.response.status).toEqualTypeOf<200>();
       expect(listRequest.response.status).toEqual(200);
 
@@ -162,7 +167,7 @@ export function declareGetHttpInterceptorTests({ platform }: SharedHttpIntercept
 
       expect(listRequests).toHaveLength(1);
       const [listRequest] = listRequests;
-      expect(listRequest).toBeInstanceOf(Request);
+      expect(listRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(listRequest.searchParams).toEqualTypeOf<HttpSearchParams<UserListSearchParams>>();
       expect(listRequest.searchParams).toBeInstanceOf(HttpSearchParams);
@@ -229,12 +234,13 @@ export function declareGetHttpInterceptorTests({ platform }: SharedHttpIntercept
 
       expect(listRequests).toHaveLength(1);
       const [listRequest] = listRequests;
-      expect(listRequest).toBeInstanceOf(Request);
+      expect(listRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(listRequest.headers).toEqualTypeOf<HttpHeaders<UserListRequestHeaders>>();
       expect(listRequest.headers).toBeInstanceOf(HttpHeaders);
       expect(listRequest.headers.get('accept')).toBe('application/json');
 
+      expect(listRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(listRequest.response.headers).toEqualTypeOf<HttpHeaders<UserListResponseHeaders>>();
       expect(listRequest.response.headers).toBeInstanceOf(HttpHeaders);
       expect(listRequest.response.headers.get('content-type')).toBe('application/json');
@@ -269,11 +275,12 @@ export function declareGetHttpInterceptorTests({ platform }: SharedHttpIntercept
 
       expect(genericGetRequests).toHaveLength(1);
       const [genericGetRequest] = genericGetRequests;
-      expect(genericGetRequest).toBeInstanceOf(Request);
+      expect(genericGetRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(genericGetRequest.body).toEqualTypeOf<null>();
       expect(genericGetRequest.body).toBe(null);
 
+      expect(genericGetRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(genericGetRequest.response.status).toEqualTypeOf<200>();
       expect(genericGetRequest.response.status).toEqual(200);
 
@@ -299,11 +306,12 @@ export function declareGetHttpInterceptorTests({ platform }: SharedHttpIntercept
 
       expect(specificGetRequests).toHaveLength(1);
       const [specificGetRequest] = specificGetRequests;
-      expect(specificGetRequest).toBeInstanceOf(Request);
+      expect(specificGetRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(specificGetRequest.body).toEqualTypeOf<null>();
       expect(specificGetRequest.body).toBe(null);
 
+      expect(specificGetRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(specificGetRequest.response.status).toEqualTypeOf<200>();
       expect(specificGetRequest.response.status).toEqual(200);
 
@@ -363,12 +371,13 @@ export function declareGetHttpInterceptorTests({ platform }: SharedHttpIntercept
       expect(listRequestsWithResponse).toHaveLength(1);
 
       const [listRequestWithResponse] = listRequestsWithResponse;
-      expect(listRequestWithResponse).toBeInstanceOf(Request);
+      expect(listRequestWithResponse).toBeInstanceOf(HttpRequest);
       expect(listRequestWithResponse.response.status).toEqual(200);
 
       expectTypeOf(listRequestWithResponse.body).toEqualTypeOf<null>();
       expect(listRequestWithResponse.body).toBe(null);
 
+      expect(listRequestWithResponse.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(listRequestWithResponse.response.status).toEqualTypeOf<200>();
       expect(listRequestWithResponse.response.status).toEqual(200);
 
@@ -414,11 +423,12 @@ export function declareGetHttpInterceptorTests({ platform }: SharedHttpIntercept
 
       expect(listRequests).toHaveLength(1);
       const [listRequest] = listRequests;
-      expect(listRequest).toBeInstanceOf(Request);
+      expect(listRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(listRequest.body).toEqualTypeOf<null>();
       expect(listRequest.body).toBe(null);
 
+      expect(listRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(listRequest.response.status).toEqualTypeOf<200>();
       expect(listRequest.response.status).toEqual(200);
 
@@ -443,11 +453,12 @@ export function declareGetHttpInterceptorTests({ platform }: SharedHttpIntercept
 
       expect(errorListRequests).toHaveLength(1);
       const [errorListRequest] = errorListRequests;
-      expect(errorListRequest).toBeInstanceOf(Request);
+      expect(errorListRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(errorListRequest.body).toEqualTypeOf<null>();
       expect(errorListRequest.body).toBe(null);
 
+      expect(errorListRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(errorListRequest.response.status).toEqualTypeOf<500>();
       expect(errorListRequest.response.status).toEqual(500);
 
@@ -502,11 +513,12 @@ export function declareGetHttpInterceptorTests({ platform }: SharedHttpIntercept
 
       expect(listRequests).toHaveLength(1);
       let [listRequest] = listRequests;
-      expect(listRequest).toBeInstanceOf(Request);
+      expect(listRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(listRequest.body).toEqualTypeOf<null>();
       expect(listRequest.body).toBe(null);
 
+      expect(listRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(listRequest.response.status).toEqualTypeOf<200>();
       expect(listRequest.response.status).toEqual(200);
 
@@ -531,11 +543,12 @@ export function declareGetHttpInterceptorTests({ platform }: SharedHttpIntercept
 
       expect(errorListRequests).toHaveLength(1);
       const [errorListRequest] = errorListRequests;
-      expect(errorListRequest).toBeInstanceOf(Request);
+      expect(errorListRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(errorListRequest.body).toEqualTypeOf<null>();
       expect(errorListRequest.body).toBe(null);
 
+      expect(errorListRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(errorListRequest.response.status).toEqualTypeOf<500>();
       expect(errorListRequest.response.status).toEqual(500);
 
@@ -554,11 +567,12 @@ export function declareGetHttpInterceptorTests({ platform }: SharedHttpIntercept
 
       expect(listRequests).toHaveLength(2);
       [listRequest] = listRequests;
-      expect(listRequest).toBeInstanceOf(Request);
+      expect(listRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(listRequest.body).toEqualTypeOf<null>();
       expect(listRequest.body).toBe(null);
 
+      expect(listRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(listRequest.response.status).toEqualTypeOf<200>();
       expect(listRequest.response.status).toEqual(200);
 
@@ -625,11 +639,12 @@ export function declareGetHttpInterceptorTests({ platform }: SharedHttpIntercept
 
       expect(listRequests).toHaveLength(1);
       const [listRequest] = listRequests;
-      expect(listRequest).toBeInstanceOf(Request);
+      expect(listRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(listRequest.body).toEqualTypeOf<null>();
       expect(listRequest.body).toBe(null);
 
+      expect(listRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(listRequest.response.status).toEqualTypeOf<200>();
       expect(listRequest.response.status).toEqual(200);
 
@@ -671,11 +686,12 @@ export function declareGetHttpInterceptorTests({ platform }: SharedHttpIntercept
 
       expect(listRequests).toHaveLength(1);
       const [listRequest] = listRequests;
-      expect(listRequest).toBeInstanceOf(Request);
+      expect(listRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(listRequest.body).toEqualTypeOf<null>();
       expect(listRequest.body).toBe(null);
 
+      expect(listRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(listRequest.response.status).toEqualTypeOf<200>();
       expect(listRequest.response.status).toEqual(200);
 

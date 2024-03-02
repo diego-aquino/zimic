@@ -1,6 +1,8 @@
 import { afterAll, afterEach, beforeAll, expect, expectTypeOf, it } from 'vitest';
 
 import HttpHeaders from '@/http/headers/HttpHeaders';
+import HttpRequest from '@/http/requests/HttpRequest';
+import HttpResponse from '@/http/responses/HttpResponse';
 import HttpSearchParams from '@/http/searchParams/HttpSearchParams';
 import { createHttpInterceptorWorker } from '@/interceptor/http/interceptorWorker/factory';
 import HttpInterceptorWorker from '@/interceptor/http/interceptorWorker/HttpInterceptorWorker';
@@ -59,11 +61,12 @@ export function declarePatchHttpInterceptorTests({ platform }: SharedHttpInterce
 
       expect(updateRequests).toHaveLength(1);
       const [updateRequest] = updateRequests;
-      expect(updateRequest).toBeInstanceOf(Request);
+      expect(updateRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(updateRequest.body).toEqualTypeOf<null>();
       expect(updateRequest.body).toBe(null);
 
+      expect(updateRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(updateRequest.response.status).toEqualTypeOf<200>();
       expect(updateRequest.response.status).toEqual(200);
 
@@ -111,11 +114,12 @@ export function declarePatchHttpInterceptorTests({ platform }: SharedHttpInterce
 
       expect(updateRequests).toHaveLength(1);
       const [updateRequest] = updateRequests;
-      expect(updateRequest).toBeInstanceOf(Request);
+      expect(updateRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(updateRequest.body).toEqualTypeOf<User>();
       expect(updateRequest.body).toEqual<User>({ name: userName });
 
+      expect(updateRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(updateRequest.response.status).toEqualTypeOf<200>();
       expect(updateRequest.response.status).toEqual(200);
 
@@ -164,7 +168,7 @@ export function declarePatchHttpInterceptorTests({ platform }: SharedHttpInterce
 
       expect(updateRequests).toHaveLength(1);
       const [updateRequest] = updateRequests;
-      expect(updateRequest).toBeInstanceOf(Request);
+      expect(updateRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(updateRequest.searchParams).toEqualTypeOf<HttpSearchParams<UserUpdateSearchParams>>();
       expect(updateRequest.searchParams).toBeInstanceOf(HttpSearchParams);
@@ -228,12 +232,13 @@ export function declarePatchHttpInterceptorTests({ platform }: SharedHttpInterce
 
       expect(updateRequests).toHaveLength(1);
       const [updateRequest] = updateRequests;
-      expect(updateRequest).toBeInstanceOf(Request);
+      expect(updateRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(updateRequest.headers).toEqualTypeOf<HttpHeaders<UserUpdateRequestHeaders>>();
       expect(updateRequest.headers).toBeInstanceOf(HttpHeaders);
       expect(updateRequest.headers.get('accept')).toBe('application/json');
 
+      expect(updateRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(updateRequest.response.headers).toEqualTypeOf<HttpHeaders<UserUpdateResponseHeaders>>();
       expect(updateRequest.response.headers).toBeInstanceOf(HttpHeaders);
       expect(updateRequest.response.headers.get('content-type')).toBe('application/json');
@@ -268,11 +273,12 @@ export function declarePatchHttpInterceptorTests({ platform }: SharedHttpInterce
 
       expect(genericUpdateRequests).toHaveLength(1);
       const [genericUpdateRequest] = genericUpdateRequests;
-      expect(genericUpdateRequest).toBeInstanceOf(Request);
+      expect(genericUpdateRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(genericUpdateRequest.body).toEqualTypeOf<null>();
       expect(genericUpdateRequest.body).toBe(null);
 
+      expect(genericUpdateRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(genericUpdateRequest.response.status).toEqualTypeOf<200>();
       expect(genericUpdateRequest.response.status).toEqual(200);
 
@@ -298,11 +304,12 @@ export function declarePatchHttpInterceptorTests({ platform }: SharedHttpInterce
 
       expect(specificUpdateRequests).toHaveLength(1);
       const [specificUpdateRequest] = specificUpdateRequests;
-      expect(specificUpdateRequest).toBeInstanceOf(Request);
+      expect(specificUpdateRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(specificUpdateRequest.body).toEqualTypeOf<null>();
       expect(specificUpdateRequest.body).toBe(null);
 
+      expect(specificUpdateRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(specificUpdateRequest.response.status).toEqualTypeOf<200>();
       expect(specificUpdateRequest.response.status).toEqual(200);
 
@@ -374,11 +381,12 @@ export function declarePatchHttpInterceptorTests({ platform }: SharedHttpInterce
       expect(updateRequestsWithResponse).toHaveLength(1);
 
       const [updateRequest] = updateRequestsWithResponse;
-      expect(updateRequest).toBeInstanceOf(Request);
+      expect(updateRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(updateRequest.body).toEqualTypeOf<User>();
       expect(updateRequest.body).toEqual<User>({ name: userName });
 
+      expect(updateRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(updateRequest.response.status).toEqualTypeOf<200>();
       expect(updateRequest.response.status).toEqual(200);
 
@@ -424,11 +432,12 @@ export function declarePatchHttpInterceptorTests({ platform }: SharedHttpInterce
 
       expect(updateRequests).toHaveLength(1);
       const [updateRequest] = updateRequests;
-      expect(updateRequest).toBeInstanceOf(Request);
+      expect(updateRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(updateRequest.body).toEqualTypeOf<null>();
       expect(updateRequest.body).toBe(null);
 
+      expect(updateRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(updateRequest.response.status).toEqualTypeOf<200>();
       expect(updateRequest.response.status).toEqual(200);
 
@@ -453,11 +462,12 @@ export function declarePatchHttpInterceptorTests({ platform }: SharedHttpInterce
 
       expect(errorUpdateRequests).toHaveLength(1);
       const [errorUpdateRequest] = errorUpdateRequests;
-      expect(errorUpdateRequest).toBeInstanceOf(Request);
+      expect(errorUpdateRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(errorUpdateRequest.body).toEqualTypeOf<null>();
       expect(errorUpdateRequest.body).toBe(null);
 
+      expect(errorUpdateRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(errorUpdateRequest.response.status).toEqualTypeOf<500>();
       expect(errorUpdateRequest.response.status).toEqual(500);
 
@@ -512,11 +522,12 @@ export function declarePatchHttpInterceptorTests({ platform }: SharedHttpInterce
 
       expect(updateRequests).toHaveLength(1);
       let [updateRequest] = updateRequests;
-      expect(updateRequest).toBeInstanceOf(Request);
+      expect(updateRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(updateRequest.body).toEqualTypeOf<null>();
       expect(updateRequest.body).toBe(null);
 
+      expect(updateRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(updateRequest.response.status).toEqualTypeOf<200>();
       expect(updateRequest.response.status).toEqual(200);
 
@@ -541,11 +552,12 @@ export function declarePatchHttpInterceptorTests({ platform }: SharedHttpInterce
 
       expect(errorUpdateRequests).toHaveLength(1);
       const [errorUpdateRequest] = errorUpdateRequests;
-      expect(errorUpdateRequest).toBeInstanceOf(Request);
+      expect(errorUpdateRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(errorUpdateRequest.body).toEqualTypeOf<null>();
       expect(errorUpdateRequest.body).toBe(null);
 
+      expect(errorUpdateRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(errorUpdateRequest.response.status).toEqualTypeOf<500>();
       expect(errorUpdateRequest.response.status).toEqual(500);
 
@@ -564,11 +576,12 @@ export function declarePatchHttpInterceptorTests({ platform }: SharedHttpInterce
 
       expect(updateRequests).toHaveLength(2);
       [updateRequest] = updateRequests;
-      expect(updateRequest).toBeInstanceOf(Request);
+      expect(updateRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(updateRequest.body).toEqualTypeOf<null>();
       expect(updateRequest.body).toBe(null);
 
+      expect(updateRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(updateRequest.response.status).toEqualTypeOf<200>();
       expect(updateRequest.response.status).toEqual(200);
 
@@ -635,11 +648,12 @@ export function declarePatchHttpInterceptorTests({ platform }: SharedHttpInterce
 
       expect(updateRequests).toHaveLength(1);
       const [updateRequest] = updateRequests;
-      expect(updateRequest).toBeInstanceOf(Request);
+      expect(updateRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(updateRequest.body).toEqualTypeOf<null>();
       expect(updateRequest.body).toBe(null);
 
+      expect(updateRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(updateRequest.response.status).toEqualTypeOf<200>();
       expect(updateRequest.response.status).toEqual(200);
 
@@ -681,11 +695,12 @@ export function declarePatchHttpInterceptorTests({ platform }: SharedHttpInterce
 
       expect(updateRequests).toHaveLength(1);
       const [updateRequest] = updateRequests;
-      expect(updateRequest).toBeInstanceOf(Request);
+      expect(updateRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(updateRequest.body).toEqualTypeOf<null>();
       expect(updateRequest.body).toBe(null);
 
+      expect(updateRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(updateRequest.response.status).toEqualTypeOf<200>();
       expect(updateRequest.response.status).toEqual(200);
 

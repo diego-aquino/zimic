@@ -1,6 +1,6 @@
 import HttpHeaders from './http/headers/HttpHeaders';
-import HttpRequest from './http/HttpRequest';
-import HttpResponse from './http/HttpResponse';
+import HttpRequest from './http/requests/HttpRequest';
+import HttpResponse from './http/responses/HttpResponse';
 import HttpSearchParams from './http/searchParams/HttpSearchParams';
 
 export type { JSONValue } from '@/types/json';

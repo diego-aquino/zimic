@@ -1,6 +1,8 @@
 import { afterAll, afterEach, beforeAll, expect, expectTypeOf, it } from 'vitest';
 
 import HttpHeaders from '@/http/headers/HttpHeaders';
+import HttpRequest from '@/http/requests/HttpRequest';
+import HttpResponse from '@/http/responses/HttpResponse';
 import HttpSearchParams from '@/http/searchParams/HttpSearchParams';
 import { createHttpInterceptorWorker } from '@/interceptor/http/interceptorWorker/factory';
 import HttpInterceptorWorker from '@/interceptor/http/interceptorWorker/HttpInterceptorWorker';
@@ -53,11 +55,12 @@ export function declareOptionsHttpInterceptorTests({ platform }: SharedHttpInter
 
       expect(optionsRequests).toHaveLength(1);
       const [optionsRequest] = optionsRequests;
-      expect(optionsRequest).toBeInstanceOf(Request);
+      expect(optionsRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(optionsRequest.body).toEqualTypeOf<null>();
       expect(optionsRequest.body).toBe(null);
 
+      expect(optionsRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(optionsRequest.response.status).toEqualTypeOf<200>();
       expect(optionsRequest.response.status).toEqual(200);
 
@@ -100,14 +103,16 @@ export function declareOptionsHttpInterceptorTests({ platform }: SharedHttpInter
 
       expect(optionsRequests).toHaveLength(1);
       const [optionsRequest] = optionsRequests;
-      expect(optionsRequest).toBeInstanceOf(Request);
+      expect(optionsRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(optionsRequest.body).toEqualTypeOf<Filters>();
       expect(optionsRequest.body).toEqual<Filters>({ name: userName });
 
+      expect(optionsRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(optionsRequest.response.status).toEqualTypeOf<200>();
       expect(optionsRequest.response.status).toEqual(200);
 
+      expect(optionsRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(optionsRequest.response.status).toEqualTypeOf<200>();
       expect(optionsRequest.response.status).toEqual(200);
 
@@ -155,7 +160,7 @@ export function declareOptionsHttpInterceptorTests({ platform }: SharedHttpInter
 
       expect(optionsRequests).toHaveLength(1);
       const [optionsRequest] = optionsRequests;
-      expect(optionsRequest).toBeInstanceOf(Request);
+      expect(optionsRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(optionsRequest.searchParams).toEqualTypeOf<HttpSearchParams<FiltersOptionsSearchParams>>();
       expect(optionsRequest.searchParams).toBeInstanceOf(HttpSearchParams);
@@ -217,12 +222,13 @@ export function declareOptionsHttpInterceptorTests({ platform }: SharedHttpInter
 
       expect(optionsRequests).toHaveLength(1);
       const [optionsRequest] = optionsRequests;
-      expect(optionsRequest).toBeInstanceOf(Request);
+      expect(optionsRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(optionsRequest.headers).toEqualTypeOf<HttpHeaders<FilterOptionsRequestHeaders>>();
       expect(optionsRequest.headers).toBeInstanceOf(HttpHeaders);
       expect(optionsRequest.headers.get('accept')).toBe('application/json');
 
+      expect(optionsRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(optionsRequest.response.headers).toEqualTypeOf<HttpHeaders<FilterOptionsResponseHeaders>>();
       expect(optionsRequest.response.headers).toBeInstanceOf(HttpHeaders);
       expect(optionsRequest.response.headers.get('content-type')).toBe('application/json');
@@ -253,11 +259,12 @@ export function declareOptionsHttpInterceptorTests({ platform }: SharedHttpInter
 
       expect(genericOptionsRequests).toHaveLength(1);
       const [genericOptionsRequest] = genericOptionsRequests;
-      expect(genericOptionsRequest).toBeInstanceOf(Request);
+      expect(genericOptionsRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(genericOptionsRequest.body).toEqualTypeOf<null>();
       expect(genericOptionsRequest.body).toBe(null);
 
+      expect(genericOptionsRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(genericOptionsRequest.response.status).toEqualTypeOf<200>();
       expect(genericOptionsRequest.response.status).toEqual(200);
 
@@ -279,11 +286,12 @@ export function declareOptionsHttpInterceptorTests({ platform }: SharedHttpInter
 
       expect(specificOptionsRequests).toHaveLength(1);
       const [specificOptionsRequest] = specificOptionsRequests;
-      expect(specificOptionsRequest).toBeInstanceOf(Request);
+      expect(specificOptionsRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(specificOptionsRequest.body).toEqualTypeOf<null>();
       expect(specificOptionsRequest.body).toBe(null);
 
+      expect(specificOptionsRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(specificOptionsRequest.response.status).toEqualTypeOf<200>();
       expect(specificOptionsRequest.response.status).toEqual(200);
 
@@ -339,12 +347,13 @@ export function declareOptionsHttpInterceptorTests({ platform }: SharedHttpInter
       expect(optionsRequestsWithResponse).toHaveLength(1);
 
       const [optionsRequestWithResponse] = optionsRequestsWithResponse;
-      expect(optionsRequestWithResponse).toBeInstanceOf(Request);
+      expect(optionsRequestWithResponse).toBeInstanceOf(HttpRequest);
       expect(optionsRequestWithResponse.response.status).toEqual(200);
 
       expectTypeOf(optionsRequestWithResponse.body).toEqualTypeOf<null>();
       expect(optionsRequestWithResponse.body).toBe(null);
 
+      expect(optionsRequestWithResponse.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(optionsRequestWithResponse.response.status).toEqualTypeOf<200>();
       expect(optionsRequestWithResponse.response.status).toEqual(200);
 
@@ -386,11 +395,12 @@ export function declareOptionsHttpInterceptorTests({ platform }: SharedHttpInter
 
       expect(optionsRequests).toHaveLength(1);
       const [optionsRequest] = optionsRequests;
-      expect(optionsRequest).toBeInstanceOf(Request);
+      expect(optionsRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(optionsRequest.body).toEqualTypeOf<null>();
       expect(optionsRequest.body).toBe(null);
 
+      expect(optionsRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(optionsRequest.response.status).toEqualTypeOf<204>();
       expect(optionsRequest.response.status).toEqual(204);
 
@@ -415,11 +425,12 @@ export function declareOptionsHttpInterceptorTests({ platform }: SharedHttpInter
 
       expect(errorOptionsRequests).toHaveLength(1);
       const [errorOptionsRequest] = errorOptionsRequests;
-      expect(errorOptionsRequest).toBeInstanceOf(Request);
+      expect(errorOptionsRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(errorOptionsRequest.body).toEqualTypeOf<null>();
       expect(errorOptionsRequest.body).toBe(null);
 
+      expect(errorOptionsRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(errorOptionsRequest.response.status).toEqualTypeOf<500>();
       expect(errorOptionsRequest.response.status).toEqual(500);
 
@@ -470,11 +481,12 @@ export function declareOptionsHttpInterceptorTests({ platform }: SharedHttpInter
 
       expect(optionsRequests).toHaveLength(1);
       let [optionsRequest] = optionsRequests;
-      expect(optionsRequest).toBeInstanceOf(Request);
+      expect(optionsRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(optionsRequest.body).toEqualTypeOf<null>();
       expect(optionsRequest.body).toBe(null);
 
+      expect(optionsRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(optionsRequest.response.status).toEqualTypeOf<204>();
       expect(optionsRequest.response.status).toEqual(204);
 
@@ -499,11 +511,12 @@ export function declareOptionsHttpInterceptorTests({ platform }: SharedHttpInter
 
       expect(errorOptionsRequests).toHaveLength(1);
       const [errorOptionsRequest] = errorOptionsRequests;
-      expect(errorOptionsRequest).toBeInstanceOf(Request);
+      expect(errorOptionsRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(errorOptionsRequest.body).toEqualTypeOf<null>();
       expect(errorOptionsRequest.body).toBe(null);
 
+      expect(errorOptionsRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(errorOptionsRequest.response.status).toEqualTypeOf<500>();
       expect(errorOptionsRequest.response.status).toEqual(500);
 
@@ -519,11 +532,12 @@ export function declareOptionsHttpInterceptorTests({ platform }: SharedHttpInter
 
       expect(optionsRequests).toHaveLength(2);
       [optionsRequest] = optionsRequests;
-      expect(optionsRequest).toBeInstanceOf(Request);
+      expect(optionsRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(optionsRequest.body).toEqualTypeOf<null>();
       expect(optionsRequest.body).toBe(null);
 
+      expect(optionsRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(optionsRequest.response.status).toEqualTypeOf<204>();
       expect(optionsRequest.response.status).toEqual(204);
 
@@ -586,11 +600,12 @@ export function declareOptionsHttpInterceptorTests({ platform }: SharedHttpInter
 
       expect(optionsRequests).toHaveLength(1);
       const [optionsRequest] = optionsRequests;
-      expect(optionsRequest).toBeInstanceOf(Request);
+      expect(optionsRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(optionsRequest.body).toEqualTypeOf<null>();
       expect(optionsRequest.body).toBe(null);
 
+      expect(optionsRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(optionsRequest.response.status).toEqualTypeOf<204>();
       expect(optionsRequest.response.status).toEqual(204);
 
@@ -630,11 +645,12 @@ export function declareOptionsHttpInterceptorTests({ platform }: SharedHttpInter
 
       expect(optionsRequests).toHaveLength(1);
       const [optionsRequest] = optionsRequests;
-      expect(optionsRequest).toBeInstanceOf(Request);
+      expect(optionsRequest).toBeInstanceOf(HttpRequest);
 
       expectTypeOf(optionsRequest.body).toEqualTypeOf<null>();
       expect(optionsRequest.body).toBe(null);
 
+      expect(optionsRequest.response).toBeInstanceOf(HttpResponse);
       expectTypeOf(optionsRequest.response.status).toEqualTypeOf<204>();
       expect(optionsRequest.response.status).toEqual(204);
 

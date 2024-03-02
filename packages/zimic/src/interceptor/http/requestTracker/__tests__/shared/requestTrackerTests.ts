@@ -1,7 +1,7 @@
 import { expectTypeOf, expect, vi, it, beforeAll, afterAll, describe } from 'vitest';
 
-import HttpRequest from '@/http/HttpRequest';
-import HttpResponse from '@/http/HttpResponse';
+import HttpRequest from '@/http/requests/HttpRequest';
+import HttpResponse from '@/http/responses/HttpResponse';
 import { createHttpInterceptor } from '@/interceptor/http/interceptor/factory';
 import HttpInterceptor from '@/interceptor/http/interceptor/HttpInterceptor';
 import { HttpInterceptorSchema } from '@/interceptor/http/interceptor/types/schema';
@@ -133,7 +133,7 @@ export function declareSharedHttpRequestTrackerTests(options: { platform: HttpIn
       const tracker = new HttpRequestTracker<Schema, 'GET', '/users'>(interceptor, 'GET', '/users');
       tracker.respond(responseFactory);
 
-      const request = new Request(baseURL);
+      const request = new HttpRequest(baseURL);
       const parsedRequest = await HttpInterceptorWorker.parseRawRequest<MethodSchema>(request);
       const response = await tracker.applyResponseDeclaration(parsedRequest);
 
@@ -222,7 +222,7 @@ export function declareSharedHttpRequestTrackerTests(options: { platform: HttpIn
       expect(interceptedRequests[0]).toEqual(parsedRequest);
 
       expectTypeOf(interceptedRequests[0].raw).toEqualTypeOf<HttpRequest<{ success?: undefined }>>();
-      expect(interceptedRequests[0].raw).toBeInstanceOf(Request);
+      expect(interceptedRequests[0].raw).toBeInstanceOf(HttpRequest);
       expect(interceptedRequests[0].raw.url).toBe(`${baseURL}/`);
       expect(interceptedRequests[0].raw.method).toBe('POST');
       expect(interceptedRequests[0].raw.headers).toEqual(request.headers);
@@ -232,7 +232,7 @@ export function declareSharedHttpRequestTrackerTests(options: { platform: HttpIn
       expect(interceptedRequests[0].response).toEqual(parsedResponse);
 
       expectTypeOf(interceptedRequests[0].response.raw).toEqualTypeOf<HttpResponse<{ success: true }, 200>>();
-      expect(interceptedRequests[0].response.raw).toBeInstanceOf(Response);
+      expect(interceptedRequests[0].response.raw).toBeInstanceOf(HttpResponse);
       expect(interceptedRequests[0].response.raw.status).toBe(200);
       expect(interceptedRequests[0].response.raw.headers).toEqual(response.headers);
       expectTypeOf(interceptedRequests[0].response.raw.json).toEqualTypeOf<() => Promise<{ success: true }>>();
