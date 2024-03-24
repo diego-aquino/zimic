@@ -12,6 +12,7 @@ export type HttpHeadersSchemaTuple<Schema extends HttpHeadersSchema> = {
   [Key in keyof Schema & string]: [Key, Defined<Schema[Key]>];
 }[keyof Schema & string];
 
+// TODO: Add docs
 export type HttpHeadersInit<Schema extends HttpHeadersSchema> =
   | Headers
   | Schema

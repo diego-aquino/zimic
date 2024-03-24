@@ -8,8 +8,10 @@ import { HttpSearchParamsSchema } from '../searchParams/types';
 /** The default body type (JSON) for HTTP requests and responses. */
 export type DefaultBody = JSONValue;
 
+// TODO: Add docs
 export type StrictHeaders<Schema extends HttpHeadersSchema> = Pick<HttpHeaders<Schema>, keyof Headers>;
 
+// TODO: Add docs
 export type StrictURLSearchParams<Schema extends HttpSearchParamsSchema> = Pick<
   HttpSearchParams<Schema>,
   keyof URLSearchParams

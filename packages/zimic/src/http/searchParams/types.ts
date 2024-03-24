@@ -12,6 +12,7 @@ export type HttpSearchParamsSchemaTuple<Schema extends HttpSearchParamsSchema> =
   [Key in keyof Schema & string]: [Key, ArrayItemIfArray<Defined<Schema[Key]>>];
 }[keyof Schema & string];
 
+// TODO: Add docs
 export type HttpSearchParamsInit<Schema extends HttpSearchParamsSchema> =
   | string
   | URLSearchParams

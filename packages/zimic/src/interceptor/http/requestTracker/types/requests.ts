@@ -17,6 +17,7 @@ export type HttpRequestTrackerResponseHeadersAttribute<ResponseSchema extends Ht
     ? { headers?: undefined }
     : { headers: HttpHeadersInit<Default<ResponseSchema['headers']>> };
 
+// TODO: Add docs
 export type HttpRequestTrackerResponseDeclaration<
   MethodSchema extends HttpServiceMethodSchema,
   StatusCode extends HttpServiceResponseSchemaStatusCode<Default<MethodSchema['response']>>,
@@ -25,6 +26,7 @@ export type HttpRequestTrackerResponseDeclaration<
 } & HttpRequestTrackerResponseBodyAttribute<Default<MethodSchema['response']>[StatusCode]> &
   HttpRequestTrackerResponseHeadersAttribute<Default<MethodSchema['response']>[StatusCode]>;
 
+// TODO: Add docs
 export type HttpRequestTrackerResponseDeclarationFactory<
   MethodSchema extends HttpServiceMethodSchema,
   StatusCode extends HttpServiceResponseSchemaStatusCode<Default<MethodSchema['response']>>,
@@ -45,6 +47,7 @@ export type HttpRequestBodySchema<MethodSchema extends HttpServiceMethodSchema> 
   null
 >;
 
+// TODO: Add docs
 export interface HttpInterceptorRequest<MethodSchema extends HttpServiceMethodSchema>
   extends Omit<HttpRequest, keyof Body | 'headers'> {
   headers: HttpHeaders<HttpRequestHeadersSchema<MethodSchema>>;
@@ -63,6 +66,7 @@ export type HttpResponseBodySchema<
   StatusCode extends HttpServiceResponseSchemaStatusCode<Default<MethodSchema['response']>>,
 > = Default<Default<MethodSchema['response']>[StatusCode]['body'], null>;
 
+// TODO: Add docs
 export interface HttpInterceptorResponse<
   MethodSchema extends HttpServiceMethodSchema,
   StatusCode extends HttpServiceResponseSchemaStatusCode<Default<MethodSchema['response']>>,
@@ -82,6 +86,7 @@ export const HTTP_INTERCEPTOR_RESPONSE_HIDDEN_BODY_PROPERTIES =
     Exclude<keyof Body, keyof HttpInterceptorResponse<never, never>>
   >;
 
+// TODO: Add docs
 export interface TrackedHttpInterceptorRequest<
   MethodSchema extends HttpServiceMethodSchema,
   StatusCode extends HttpServiceResponseSchemaStatusCode<Default<MethodSchema['response']>> = never,

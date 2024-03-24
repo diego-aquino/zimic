@@ -98,10 +98,12 @@ class HttpSearchParams<Schema extends HttpSearchParamsSchema = never> extends UR
     >;
   }
 
+  // TODO: Add docs
   equals<OtherSchema extends Schema>(otherParams: HttpSearchParams<OtherSchema>): boolean {
     return this.contains(otherParams) && this.size === otherParams.size;
   }
 
+  // TODO: Add docs
   contains<OtherSchema extends Schema>(otherParams: HttpSearchParams<OtherSchema>): boolean {
     for (const [key, value] of otherParams.entries()) {
       if (!super.has.call(this, key, value)) {

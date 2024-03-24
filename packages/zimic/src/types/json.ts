@@ -1,8 +1,10 @@
 /** Value that can be represented in JSON. */
 export type JSONValue = { [key: string]: JSONValue } | JSONValue[] | string | number | boolean | null | undefined;
 
+// TODO: Add docs
 export type JSONCompatible<Type extends JSONValue> = Type;
 
+// TODO: Add docs
 export type JSONSerialized<Type> = Type extends string | number | boolean | null
   ? Type
   : Type extends Date

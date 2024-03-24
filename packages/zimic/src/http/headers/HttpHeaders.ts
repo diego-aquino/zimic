@@ -73,6 +73,7 @@ class HttpHeaders<Schema extends HttpHeadersSchema = HttpHeadersSchema> extends 
     >;
   }
 
+  // TODO: Add docs
   equals<OtherSchema extends Schema>(otherHeaders: HttpHeaders<OtherSchema>): boolean {
     for (const [key, value] of otherHeaders.entries()) {
       const otherValue = super.get.call(this, key);
@@ -91,6 +92,7 @@ class HttpHeaders<Schema extends HttpHeadersSchema = HttpHeadersSchema> extends 
     return true;
   }
 
+  // TODO: Add docs
   contains<OtherSchema extends Schema>(otherHeaders: HttpHeaders<OtherSchema>): boolean {
     for (const [key, value] of otherHeaders.entries()) {
       const otherValue = super.get.call(this, key);
