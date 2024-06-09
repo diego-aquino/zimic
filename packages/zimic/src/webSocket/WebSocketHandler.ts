@@ -2,7 +2,6 @@ import ClientSocket from 'isomorphic-ws';
 
 import { Collection } from '@/types/utils';
 import { IsomorphicCrypto, importCrypto } from '@/utils/crypto';
-import { isClientSide } from '@/utils/environment';
 import {
   DEFAULT_WEB_SOCKET_LIFECYCLE_TIMEOUT,
   DEFAULT_WEB_SOCKET_MESSAGE_TIMEOUT,
@@ -94,6 +93,8 @@ abstract class WebSocketHandler<Schema extends WebSocket.ServiceSchema> {
      * All supported websocket messages should be encoded as strings. */
     if (typeof data === 'string') {
       return data;
+    } else if (data instanceof Buffer) {
+      return data.toString('utf-8');
     } else {
       throw new InvalidWebSocketMessage(data);
     }
@@ -302,23 +303,9 @@ abstract class WebSocketHandler<Schema extends WebSocket.ServiceSchema> {
         reject(timeoutError);
       }, this._messageTimeout);
 
-      if (isClientSide()) {
-        socket.send(stringifiedMessage);
-        clearTimeout(messageTimeout);
-        resolve();
-      } else {
-        socket.send(stringifiedMessage, (error) => {
-          clearTimeout(messageTimeout);
-
-          /* istanbul ignore if -- @preserve
-           * It is difficult to reliably simulate socket errors in tests. */
-          if (error) {
-            reject(error);
-          } else {
-            resolve();
-          }
-        });
-      }
+      socket.send(stringifiedMessage);
+      clearTimeout(messageTimeout);
+      resolve();
     });
   }
 
