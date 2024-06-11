@@ -534,9 +534,15 @@ importers:
       dotenv-cli:
         specifier: ^7.4.2
         version: 7.4.2
+      fast-glob:
+        specifier: ^3.3.2
+        version: 3.3.2
       playwright:
         specifier: ^1.44.1
         version: 1.44.1
+      prettier:
+        specifier: ^3.3.0
+        version: 3.3.2
       tsup:
         specifier: ^8.1.0
         version: 8.1.0(@swc/core@1.6.5)(postcss@8.4.38)(typescript@5.5.2)
