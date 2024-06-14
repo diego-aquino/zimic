@@ -89,6 +89,7 @@
   },
   "devDependencies": {
     "@types/cross-spawn": "^6.0.6",
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.14.8",
     "@types/ws": "^8.5.10",
     "@types/yargs": "^17.0.32",
@@ -99,6 +100,7 @@
     "@zimic/tsconfig": "workspace:*",
     "dotenv-cli": "^7.4.2",
     "fast-glob": "^3.3.2",
+    "js-yaml": "^4.1.0",
     "playwright": "^1.44.1",
     "prettier": "^3.3.0",
     "tsup": "^8.1.0",
